@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card"
 const features = [
   {
     icon: Shield,
-    title: "Escaneo Completo",
+    title: "Scannig",
     description: "Detects OWASP Top 10 vulnerabilities, XSS, SQL Injection, CSRF, and more.",
   },
   {
@@ -13,24 +13,9 @@ const features = [
     description: "Get a detailed report in less than 15 seconds with real-time analysis.",
   },
   {
-    icon: Eye,
-    title: "Monitoreo Continuo",
-    description: "Set up automatic alerts to detect new vulnerabilities.",
-  },
-  {
     icon: Lock,
     title: "Header Analysis",
-    description: "Verifica configuraciones de seguridad HTTP, HTTPS, CSP y CORS.",
-  },
-  {
-    icon: AlertTriangle,
-    title: "Malware Detection",
-    description: "Identifies malicious code, suspicious scripts, and hidden threats.",
-  },
-  {
-    icon: CheckCircle,
-    title: "Recomendaciones",
-    description: "Receive practical suggestions to fix each vulnerability found.",
+    description: "Verifies HTTP, HTTPS, CSP, and CORS security configurations.",
   },
 ]
 

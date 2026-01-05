@@ -7,7 +7,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogClose } from "@/components/ui/dialog"
-import { Shield, Search, Lock, AlertTriangle } from "lucide-react"
+import { Shield, Search, Lock, AlertTriangle, Copy as CopyIcon } from "lucide-react"
 
 export function Hero() {
   const [url, setUrl] = useState("")
@@ -15,6 +15,7 @@ export function Hero() {
   const [modalOpen, setModalOpen] = useState(false)
   const [result, setResult] = useState<any>(null)
   const [error, setError] = useState<string | null>(null)
+  const [copied, setCopied] = useState(false)
 
   const handleScan = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -44,7 +45,7 @@ export function Hero() {
   }
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 py-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-visible px-2 py-20">
       {/* Animated background grid */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e40af_1px,transparent_1px),linear-gradient(to_bottom,#1e40af_1px,transparent_1px)] bg-[size:40px_40px] animate-grid-move" />
@@ -70,7 +71,7 @@ export function Hero() {
         />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto text-center space-y-8">
+      <div className="relative z-10 max-w-screen-2xl w-full mx-auto text-center space-y-8">
         {/* Logo/Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm animate-in fade-in slide-in-from-bottom-4 duration-1000">
           <Shield className="w-4 h-4 text-primary" />
@@ -101,7 +102,7 @@ export function Hero() {
                   type="url"
                   placeholder="https://example.com"
                   value={url}
-                  onChange={(e) => setUrl(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUrl(e.target.value)}
                   className="pl-12 h-14 text-lg bg-card/50 backdrop-blur-sm border-border/50 focus:border-primary transition-all"
                   required
                 />
@@ -155,33 +156,24 @@ export function Hero() {
             let barColor = '';
             let barBg = '';
             let label = '';
-            let icon = null;
-            let iconBg = '';
             if (value >= 80) {
               barColor = 'linear-gradient(90deg, #4ade80 0%, #22c55e 100%)'; // green gradient
               barBg = 'bg-green-50';
               label = 'Safe site!';
-              icon = <span className="inline-block align-middle mr-3 text-green-600 text-3xl">✔️</span>;
-              iconBg = 'bg-green-100';
             } else if (value >= 50) {
               barColor = 'linear-gradient(90deg, #fde68a 0%, #facc15 100%)'; // yellow gradient
               barBg = 'bg-yellow-50';
               label = 'Caution: review recommendations';
-              icon = <span className="inline-block align-middle mr-3 text-yellow-600 text-3xl">⚠️</span>;
-              iconBg = 'bg-yellow-100';
             } else {
               barColor = 'linear-gradient(90deg, #fca5a5 0%, #ef4444 100%)'; // red gradient
               barBg = 'bg-red-50';
               label = 'High risk! Fix vulnerabilities';
-              icon = <span className="inline-block align-middle mr-3 text-red-600 text-3xl">❌</span>;
-              iconBg = 'bg-red-100';
             }
             return (
               <div className={
                 `mb-6 mt-6 max-w-2xl mx-auto p-6 rounded-2xl border border-primary/30 shadow-xl flex flex-col items-center gap-4 bg-card/70 backdrop-blur-md`
               }>
-                <div className="flex items-center gap-3 w-full justify-center text-center">
-                  <div className={`rounded-full p-2 ${iconBg} shadow-md flex items-center justify-center`}>{icon}</div>
+                <div className="flex items-center w-full justify-center text-center">
                   <span className="text-lg md:text-2xl font-bold text-foreground/90">{result.score.status ? result.score.status : label}</span>
                 </div>
                 <div className="w-full h-10 bg-muted rounded-lg border border-primary/20 relative overflow-hidden shadow-inner mt-2">
@@ -212,13 +204,13 @@ export function Hero() {
           })()
         )}
         {(error || result) && (
-          <div className="fixed left-0 right-0 z-20 mt-6 p-6 rounded-lg bg-card/50 backdrop-blur-sm border border-primary/20 animate-in fade-in w-full max-w-full mx-auto top-auto md:static md:relative">
+          <div className="relative left-0 right-0 z-20 mt-6 p-6 rounded-lg bg-card/50 backdrop-blur-sm border border-primary/20 animate-in fade-in w-full max-w-full mx-auto">
             <div className="flex flex-col md:flex-row gap-8 w-full max-w-screen-xl mx-auto">
               <div className="flex-1 min-w-0 md:pr-6 w-full">
                 <span className="font-semibold text-lg block mb-2">
                   {error ? "Analysis error" : "Summary for everyone"}
                 </span>
-                <div className="text-muted-foreground text-sm">
+                <div className="text-foreground text-sm">
                   {error
                     ? error
                     : result && (
@@ -290,9 +282,9 @@ export function Hero() {
               </div>
               <div className="flex-1 min-w-0 border-t md:border-t-0 md:border-l border-border/30 pt-4 md:pt-0 md:pl-6 w-full">
                 <span className="font-semibold text-lg block mb-2">Technical view (JSON):</span>
-                <div className="text-muted-foreground text-sm">
+                <div className="text-foreground text-sm">
                   {result
-                    ? <pre className="text-left whitespace-pre-wrap break-words text-xs md:text-sm max-h-80 overflow-auto bg-muted rounded p-2 border mt-2">{JSON.stringify(result, null, 2)}</pre>
+                    ? <pre className="text-left whitespace-pre-wrap break-words text-xs md:text-sm max-h-93 overflow-auto bg-muted rounded p-2 border mt-2">{JSON.stringify(result, null, 2)}</pre>
                     : !error && "No response received."}
                 </div>
               </div>
