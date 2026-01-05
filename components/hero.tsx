@@ -208,7 +208,7 @@ export function Hero() {
             <div className="flex flex-col md:flex-row gap-8 w-full max-w-screen-xl mx-auto">
               <div className="flex-1 min-w-0 md:pr-6 w-full">
                 <span className="font-semibold text-lg block mb-2">
-                  {error ? "Analysis error" : "Summary for everyone"}
+                  {error ? "Analysis error" : "Summary:"}
                 </span>
                 <div className="text-foreground text-sm">
                   {error
