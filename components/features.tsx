@@ -1,3 +1,6 @@
+// This is a comment that should be removed
+// Another comment
+/* This is a block comment that should be removed */
 import { Shield, Zap, Eye, Lock, AlertTriangle, CheckCircle } from "lucide-react"
 import { Card } from "@/components/ui/card"
 

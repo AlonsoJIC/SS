@@ -46,12 +46,12 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-visible px-2 py-20">
-      {/* Animated background grid */}
+      
       <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e40af_1px,transparent_1px),linear-gradient(to_bottom,#1e40af_1px,transparent_1px)] bg-[size:40px_40px] animate-grid-move" />
       </div>
 
-      {/* Floating security icons */}
+      
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <Shield
           className="absolute top-20 left-[10%] w-8 h-8 text-primary/20 animate-float"
@@ -72,13 +72,13 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 max-w-screen-2xl w-full mx-auto text-center space-y-8">
-        {/* Logo/Badge */}
+        
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm animate-in fade-in slide-in-from-bottom-4 duration-1000">
           <Shield className="w-4 h-4 text-primary" />
           <span className="text-sm font-medium text-foreground">Defensive Security Platform</span>
         </div>
 
-        {/* Main heading */}
+        
         <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-balance animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-100">
           <span className="text-foreground">SecureSight</span>
           <br />
@@ -87,12 +87,12 @@ export function Hero() {
           <span className="text-foreground">in seconds</span>
         </h1>
 
-        {/* Description */}
+        
         <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
           Just enter a URL and get a complete analysis of vulnerabilities, misconfigurations, and security risks in real time.
         </p>
 
-        {/* Scan form */}
+        
         <div className="max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
           <form onSubmit={handleScan} className="relative">
             <div className="flex flex-col sm:flex-row gap-3">
@@ -128,7 +128,7 @@ export function Hero() {
             </div>
           </form>
 
-          {/* Scanning animation */}
+          
           {isScanning && (
             <div className="mt-6 p-4 rounded-lg bg-card/50 backdrop-blur-sm border border-primary/20 animate-in fade-in">
               <div className="flex items-center gap-3">
@@ -149,7 +149,7 @@ export function Hero() {
 
 
 
-        {/* Barra de score debajo del form y arriba del resultado */}
+        
         {result && result.score && typeof result.score.value === 'number' && (
           (() => {
             const value = Math.max(0, Math.min(100, result.score.value));
@@ -216,7 +216,7 @@ export function Hero() {
                     : result && (
                       <ul className="list-none pl-0 mt-2 space-y-2 text-left">
                         {Object.entries(result).map(([key, value]) => {
-                          // If it's an array of objects with status/impact, show each as a row
+                          
                           if (Array.isArray(value) && value.length > 0 && typeof value[0] === 'object') {
                             return value.map((item, idx) => (
                               <li key={key + idx} className="border-b last:border-b-0 pb-1">
@@ -235,7 +235,7 @@ export function Hero() {
                               </li>
                             ));
                           }
-                          // Si es objeto con status/impact
+                          
                           if (
                             typeof value === 'object' &&
                             value !== null &&
@@ -259,7 +259,7 @@ export function Hero() {
                               </li>
                             );
                           }
-                          // Booleano simple
+                          
                           if (typeof value === 'boolean') {
                             return (
                               <li key={key}>
@@ -268,7 +268,7 @@ export function Hero() {
                               </li>
                             );
                           }
-                          // Otro tipo
+                          
                           return (
                             <li key={key}>
                               <span className="font-semibold text-primary">{key.replace(/_/g, ' ')}:</span>{' '}
@@ -292,7 +292,7 @@ export function Hero() {
           </div>
         )}
 
-        {/* Trust indicators */}
+
         <div className="flex flex-wrap items-center justify-center gap-8 pt-8 text-sm text-muted-foreground animate-in fade-in duration-1000 delay-500">
           <div className="flex items-center gap-2">
             <Shield className="w-4 h-4 text-primary" aria-label="Shield icon" />
